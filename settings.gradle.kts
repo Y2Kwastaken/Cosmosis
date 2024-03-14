@@ -2,6 +2,7 @@ rootProject.name = "Cosmosis"
 
 dependencyResolutionManagement {
     repositories {
+        mavenLocal()
         mavenCentral()
     }
 }
