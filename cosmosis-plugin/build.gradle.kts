@@ -1,3 +1,7 @@
+plugins {
+    id("org.gradle.kotlin.kotlin-dsl") version "4.3.0"
+}
+
 dependencies {
     implementation(project(":cosmosis-core"))
 }
