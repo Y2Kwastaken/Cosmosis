@@ -16,10 +16,10 @@ class CosmosisPlugin : Plugin<Project> {
     }
 
     override fun apply(target: Project) {
-        target.tasks.register("downloadCosmicTools", DownloadCosmicToolsTask::class.java) { task ->
-            task.group = DEFAULT_TASK_GROUP
-            task.cosmicToolsVersion.set(COSMIC_TOOLS_VERSION)
-            task.cosmicToolsDestination.set(target.file("build/cosmic-tools"))
+        target.tasks.register("downloadCosmicTools", DownloadCosmicToolsTask::class.java) {
+            group = DEFAULT_TASK_GROUP
+            cosmicToolsVersion = COSMIC_TOOLS_VERSION
+            cosmicToolsDestination = target.file("build/cosmic-tools")
         }
 
         target.extensions.create(
