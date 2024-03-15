@@ -8,7 +8,7 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        create("rind-verification") {
+        create("cosmosis") {
             id = "sh.miles.cosmosis"
             implementationClass = "sh.miles.cosmosis.CosmosisPlugin"
             displayName = "Rind verification injector"

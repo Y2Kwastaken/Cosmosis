@@ -11,7 +11,7 @@ import sh.miles.cosmosis.utils.COSMIC_TOOLS_GITHUB_RELEASES
 import java.nio.file.Path
 
 
-abstract class DownloadCosmicToolsTask(private val project: Project) : DefaultTask() {
+abstract class DownloadCosmicToolsTask : DefaultTask() {
 
     @get:Input
     abstract val cosmicToolsVersion: Property<String>
