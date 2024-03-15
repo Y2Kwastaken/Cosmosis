@@ -13,7 +13,6 @@ class CosmosisPlugin : Plugin<Project> {
     }
 
     override fun apply(target: Project) {
-
         target.extensions.create(
             COSMOSIS_DEVELOPER_BUNDLE,
             CosmosisDependencyExtension::class.java,
