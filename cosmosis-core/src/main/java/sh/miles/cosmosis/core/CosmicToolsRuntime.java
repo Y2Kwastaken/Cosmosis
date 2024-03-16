@@ -11,14 +11,14 @@ import java.util.stream.Collectors;
 
 public record CosmicToolsRuntime(@NotNull Path jarPath) {
 
-    public List<String> getRequiredArguments(String driver) {
+    public List<String> getRequiredArguments(String driver, String relative) {
         return Arrays.stream(new String[]{
-                "java", "-jar", jarPath.normalize().toAbsolutePath().toString(), "--driver=" + driver
+                "java", "-jar", jarPath.normalize().toAbsolutePath().toString(), "--driver=" + driver, "--cwd=" + relative
         }).collect(Collectors.toList());
     }
 
-    public List<String> getArgumentsWithExtra(String driver, List<String> arguments) {
-        var list = getRequiredArguments(driver);
+    public List<String> getArgumentsWithExtra(String driver, String relative, List<String> arguments) {
+        var list = getRequiredArguments(driver, relative);
         list.addAll(arguments);
         return list;
     }

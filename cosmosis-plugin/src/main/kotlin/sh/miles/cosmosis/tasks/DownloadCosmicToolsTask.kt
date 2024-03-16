@@ -29,7 +29,7 @@ abstract class DownloadCosmicToolsTask : DefaultTask() {
         }
 
         CosmosisPlugin.logger.lifecycle("Downloading CosmicTools from ${COSMIC_TOOLS_GITHUB_RELEASES + cosmicToolsVersion}")
-        CosmosisUtils.download(COSMIC_TOOLS_GITHUB_RELEASES + cosmicToolsVersion, path.resolve("CosmicTools.jar"))
+        CosmosisUtils.download("$COSMIC_TOOLS_GITHUB_RELEASES$cosmicToolsVersion/CosmicTools.jar", path.resolve("CosmicTools.jar"))
         CosmosisPlugin.logger.lifecycle("Finished Downloading CosmicTools")
     }
 

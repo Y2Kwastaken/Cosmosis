@@ -21,32 +21,15 @@ abstract class RunCosmicToolsTask : Exec() {
     @get:Input
     var arguments: List<String> = listOf()
 
-    private val execResult = objectFactory.property(ExecResult::class.java)
-
     override fun exec() {
-//        val clazz = AbstractExecTask::class.java
-//        val execSpecField = clazz.getDeclaredField("execSpec")
-//        val execSpec: ExecSpec
-//        if (execSpecField.trySetAccessible()) {
-//            execSpec = execSpecField.get(this) as ExecSpec
-//        } else {
-//            throw IllegalStateException("Unable to get access to ${execSpecField.name} from ${AbstractExecTask::class.java.name}")
-//        }
-
-        CosmosisPlugin.logger.lifecycle("Executing")
         val runtime = CosmicToolsRuntime(executionDir.asFile.toPath().resolve("CosmicTools.jar"))
-        CosmosisPlugin.logger.lifecycle(runtime.getArgumentsWithExtra(webDriver, arguments).toString())
-        commandLine = runtime.getArgumentsWithExtra(webDriver, arguments)
-//        val action = execActionFactory.newExecAction()
-//        execSpec.copyTo(action)
-//        action.commandLine.forEach { CosmosisPlugin.logger.lifecycle(it) }
-//        execResult.set(action.execute())
+        val arguments = runtime.getArgumentsWithExtra(
+            webDriver,
+            executionDir.asFile.toPath().toAbsolutePath().toString(),
+            arguments
+        )
+        CosmosisPlugin.logger.lifecycle("Arguments: $arguments")
+        commandLine = arguments
         super.exec()
     }
-
-//    override fun getExecutionResult(): Provider<ExecResult> {
-//        return execResult
-//    }
-
-
 }
