@@ -7,32 +7,20 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public record CosmicToolsRuntime(@NotNull Path jarPath) {
 
-    public int runStandard(@NotNull final String driver) {
-        try {
-            return run("--driver=%s".formatted(driver)).waitFor();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+    public List<String> getRequiredArguments(String driver) {
+        return Arrays.stream(new String[]{
+                "java", "-jar", jarPath.normalize().toAbsolutePath().toString(), "--driver=" + driver
+        }).collect(Collectors.toList());
     }
 
-    public Process run(@NotNull final String... args) {
-        final List<String> arguments = new ArrayList<>();
-        arguments.add("java");
-        arguments.add("-jar");
-        arguments.add(jarPath.normalize().toAbsolutePath().toString());
-        arguments.addAll(Arrays.asList(args));
-
-        try {
-            return new ProcessBuilder()
-                    .command(arguments)
-                    .inheritIO()
-                    .start();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public List<String> getArgumentsWithExtra(String driver, List<String> arguments) {
+        var list = getRequiredArguments(driver);
+        list.addAll(arguments);
+        return list;
     }
 
 }
