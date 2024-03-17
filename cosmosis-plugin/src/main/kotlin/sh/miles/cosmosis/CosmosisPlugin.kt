@@ -14,6 +14,7 @@ import sh.miles.cosmosis.core.CosmosisUtils
 import sh.miles.cosmosis.tasks.CopyCosmicReachTask
 import sh.miles.cosmosis.tasks.DownloadCosmicToolsTask
 import sh.miles.cosmosis.tasks.DownloadUnzipModLoader
+import sh.miles.cosmosis.tasks.RunClientTask
 import sh.miles.cosmosis.tasks.RunCosmicToolsTask
 import sh.miles.cosmosis.utils.COSMIC_LOADER_URL
 import sh.miles.cosmosis.utils.COSMIC_TOOLS_VERSION
@@ -67,16 +68,11 @@ class CosmosisPlugin : Plugin<Project> {
             into("$FABRIC_LOADER_DIRECTORY/mods")
         }
 
-        target.tasks.register("runClient", Exec::class.java) {
+        target.tasks.register("runClient", RunClientTask::class.java) {
             group = DEFAULT_TASK_GROUP
             description = "runs the client"
 
-            workingDir(FABRIC_LOADER_DIRECTORY)
-            commandLine = if (CosmosisUtils.ON_WINDOWS) {
-                listOf("launcher.bat")
-            } else {
-                listOf("bash", "launcher.sh")
-            }
+            launcherFileGeneric = "launcher"
         }
     }
 
