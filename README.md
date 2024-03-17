@@ -50,7 +50,7 @@ Q: Could not find sh.miles.cosmicloader:CosmicLoader:1.0.0-SNAPSHOT
 
 A: If you see this error or similar make sure that your fabric loader of choice is
 installed into your maven m2 folder. If your loader does not provide a repository
-you can install the file manually! See the accepted answer on [this](https://stackoverflow.com/questions/4955635/how-to-add-local-jar-files-to-a-maven-project)
+you can install the file manually! See the accepted answer on [this]([https://stackoverflow.com/questions/4955635/how-to-add-local-jar-files-to-a-maven-project](https://stackoverflow.com/a/4955695))
 stackoverflow thread.
 
 ### Trouble Finding Cosmic Reach
