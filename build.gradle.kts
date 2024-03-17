@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "sh.miles.cosmosis"
-version = "1.0.1-SNAPSHOT"
+version = "1.0.0-SNAPSHOT"
 
 subprojects {
     apply(plugin = "java")
