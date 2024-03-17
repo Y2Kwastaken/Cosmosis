@@ -1,24 +1,24 @@
 package sh.miles.cosmosis
 
 import org.gradle.api.DefaultTask
-import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.logging.Logger
 import org.gradle.api.logging.Logging
 import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.Delete
-import org.gradle.api.tasks.Exec
 import org.gradle.jvm.tasks.Jar
-import sh.miles.cosmosis.core.CosmosisUtils
 import sh.miles.cosmosis.tasks.CopyCosmicReachTask
 import sh.miles.cosmosis.tasks.DownloadCosmicToolsTask
 import sh.miles.cosmosis.tasks.DownloadUnzipModLoader
 import sh.miles.cosmosis.tasks.RunClientTask
+import sh.miles.cosmosis.tasks.RunClientTaskLegacy
 import sh.miles.cosmosis.tasks.RunCosmicToolsTask
 import sh.miles.cosmosis.utils.COSMIC_LOADER_URL
 import sh.miles.cosmosis.utils.COSMIC_TOOLS_VERSION
 import sh.miles.cosmosis.utils.COSMOSIS_EXTENSION
+import sh.miles.cosmosis.utils.DEFAULT_LOADER_ARTIFACT
+import sh.miles.cosmosis.utils.DEFAULT_LOADER_VERSION
 import sh.miles.cosmosis.utils.DEFAULT_SETUP_TASK_GROUP
 import sh.miles.cosmosis.utils.DEFAULT_TASK_GROUP
 import sh.miles.cosmosis.utils.FABRIC_LOADER_DIRECTORY
@@ -71,6 +71,16 @@ class CosmosisPlugin : Plugin<Project> {
         target.tasks.register("runClient", RunClientTask::class.java) {
             group = DEFAULT_TASK_GROUP
             description = "runs the client"
+
+            loaderJar = "$DEFAULT_LOADER_ARTIFACT-$DEFAULT_LOADER_VERSION.jar"
+            librariesFolder = "libs"
+
+            workingDir(FABRIC_LOADER_DIRECTORY)
+        }
+
+        target.tasks.register("runClientLegacy", RunClientTaskLegacy::class.java) {
+            group = DEFAULT_TASK_GROUP
+            description = "runs the client through a launcher shell or batch file"
 
             launcherFileGeneric = "launcher"
         }

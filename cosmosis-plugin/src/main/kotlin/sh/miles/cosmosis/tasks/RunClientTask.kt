@@ -2,22 +2,34 @@ package sh.miles.cosmosis.tasks
 
 import org.gradle.api.tasks.Exec
 import org.gradle.api.tasks.Input
-import sh.miles.cosmosis.core.CosmosisUtils
-import sh.miles.cosmosis.utils.FABRIC_LOADER_DIRECTORY
+import sh.miles.cosmosis.CosmosisPlugin
 
 abstract class RunClientTask : Exec() {
 
     @get:Input
-    abstract var launcherFileGeneric: String
+    abstract var loaderJar: String
+
+    @get:Input
+    abstract var librariesFolder: String
+
+    private val javaLaunchSettings = mutableListOf("-Dfabric.skipMcProvider=true", "-Dfabric.development=true")
 
     override fun exec() {
-        workingDir(FABRIC_LOADER_DIRECTORY)
-        commandLine = if (CosmosisUtils.ON_WINDOWS) {
-            listOf("$launcherFileGeneric.bat")
-        } else {
-            listOf("bash", "$launcherFileGeneric.sh")
-        }
+        val command = mutableListOf(
+            "java",
+        )
+        command.addAll(javaLaunchSettings)
+        command.add("-classpath")
+        command.add("cosmic-reach.jar:$loaderJar:$librariesFolder/*")
+        command.add("net.fabricmc.loader.launch.knot.KnotClient")
+
+        commandLine = command
+        CosmosisPlugin.logger.lifecycle("Launching with arguments: $command")
         super.exec()
+    }
+
+    fun addLaunchArgument(vararg args: String) {
+        javaLaunchSettings.addAll(args)
     }
 
 }
