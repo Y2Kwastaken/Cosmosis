@@ -13,6 +13,7 @@ abstract class CosmosisExtension(
     private val dependencies: DependencyHandler
 ) {
     abstract val version: Property<String>
+    abstract val javaBin: Property<String>
 
     fun repoBundle() {
         repositories.add(repositories.mavenLocal())

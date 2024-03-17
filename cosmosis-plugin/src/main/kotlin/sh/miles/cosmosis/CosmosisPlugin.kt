@@ -34,6 +34,8 @@ class CosmosisPlugin : Plugin<Project> {
             COSMOSIS_EXTENSION, CosmosisExtension::class.java, target.dependencies
         )
 
+        cosmosisExtension.javaBin.set("java")
+
         setupSetupTasks(cosmosisExtension, target)
         setupCosmosisTasks(target)
     }

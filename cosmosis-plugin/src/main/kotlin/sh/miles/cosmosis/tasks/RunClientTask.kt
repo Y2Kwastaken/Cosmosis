@@ -2,9 +2,13 @@ package sh.miles.cosmosis.tasks
 
 import org.gradle.api.tasks.Exec
 import org.gradle.api.tasks.Input
+import sh.miles.cosmosis.CosmosisExtension
 import sh.miles.cosmosis.CosmosisPlugin
 
 abstract class RunClientTask : Exec() {
+
+    @get:Input
+    abstract var cosmosisExtension: CosmosisExtension
 
     @get:Input
     abstract var loaderJar: String
@@ -16,7 +20,7 @@ abstract class RunClientTask : Exec() {
 
     override fun exec() {
         val command = mutableListOf(
-            "java",
+            cosmosisExtension.javaBin.get(),
         )
         command.addAll(javaLaunchSettings)
         command.add("-classpath")
