@@ -1,8 +1,8 @@
-package sh.miles.cosmosis.tasks
+package sh.miles.cosmosis.old.tasks
 
 import org.gradle.api.tasks.Exec
 import org.gradle.api.tasks.Input
-import sh.miles.cosmosis.CosmosisExtension
+import sh.miles.cosmosis.old.CosmosisExtension
 import sh.miles.cosmosis.CosmosisPlugin
 
 abstract class RunClientTask : Exec() {
@@ -28,7 +28,7 @@ abstract class RunClientTask : Exec() {
         command.add("net.fabricmc.loader.launch.knot.KnotClient")
 
         commandLine = command
-        CosmosisPlugin.logger.lifecycle("Launching with arguments: $command")
+        // CosmosisPlugin.logger.lifecycle("Launching with arguments: $command")
         super.exec()
     }
 

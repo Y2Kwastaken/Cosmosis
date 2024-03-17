@@ -1,4 +1,4 @@
-package sh.miles.cosmosis.utils
+package sh.miles.cosmosis.old.utils
 
 const val DEFAULT_SETUP_TASK_GROUP = "cosmosis-setup"
 const val DEFAULT_TASK_GROUP = "cosmosis"

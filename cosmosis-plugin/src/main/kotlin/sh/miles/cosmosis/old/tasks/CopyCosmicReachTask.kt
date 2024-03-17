@@ -1,15 +1,13 @@
-package sh.miles.cosmosis.tasks
+package sh.miles.cosmosis.old.tasks
 
 import org.gradle.api.DefaultTask
-import org.gradle.api.Project
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
-import sh.miles.cosmosis.CosmosisExtension
+import sh.miles.cosmosis.old.CosmosisExtension
 import sh.miles.cosmosis.core.CosmosisUtils
-import sh.miles.cosmosis.utils.FABRIC_LOADER_DIRECTORY
+import sh.miles.cosmosis.old.utils.FABRIC_LOADER_DIRECTORY
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
-import javax.inject.Inject
 
 abstract class CopyCosmicReachTask : DefaultTask() {
 

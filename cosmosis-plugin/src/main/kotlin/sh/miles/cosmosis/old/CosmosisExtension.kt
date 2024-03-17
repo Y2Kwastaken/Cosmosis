@@ -1,12 +1,12 @@
-package sh.miles.cosmosis
+package sh.miles.cosmosis.old
 
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.artifacts.dsl.RepositoryHandler
 import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.maven
-import sh.miles.cosmosis.utils.DEFAULT_LOADER_ARTIFACT
-import sh.miles.cosmosis.utils.DEFAULT_LOADER_GROUP
-import sh.miles.cosmosis.utils.DEFAULT_LOADER_VERSION
+import sh.miles.cosmosis.old.utils.DEFAULT_LOADER_ARTIFACT
+import sh.miles.cosmosis.old.utils.DEFAULT_LOADER_GROUP
+import sh.miles.cosmosis.old.utils.DEFAULT_LOADER_VERSION
 
 abstract class CosmosisExtension(
     private val repositories: RepositoryHandler,

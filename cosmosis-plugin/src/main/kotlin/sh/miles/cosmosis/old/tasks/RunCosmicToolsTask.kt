@@ -1,15 +1,13 @@
-package sh.miles.cosmosis.tasks
+package sh.miles.cosmosis.old.tasks
 
 import org.gradle.api.file.Directory
 import org.gradle.api.tasks.Exec
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
-import org.gradle.process.ExecResult
 import org.gradle.work.DisableCachingByDefault
-import sh.miles.cosmosis.CosmosisExtension
+import sh.miles.cosmosis.old.CosmosisExtension
 import sh.miles.cosmosis.CosmosisPlugin
 import sh.miles.cosmosis.core.CosmicToolsRuntime
-import kotlin.math.cos
 
 @DisableCachingByDefault(because = "Gradle would require more information to cache this task")
 abstract class RunCosmicToolsTask : Exec() {
@@ -34,7 +32,7 @@ abstract class RunCosmicToolsTask : Exec() {
             executionDir.asFile.toPath().toAbsolutePath().toString(),
             arguments
         )
-        CosmosisPlugin.logger.lifecycle("Arguments: $arguments")
+        // CosmosisPlugin.logger.lifecycle("Arguments: $arguments")
         commandLine = arguments
         super.exec()
     }
