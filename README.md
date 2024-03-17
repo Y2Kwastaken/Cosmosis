@@ -114,7 +114,7 @@ tasks.runClient {
 
 ### Run Client Legacy Task (Deprecated)
 
-> **Warning**
+> :warning: **Warning**<br>
 `runClientLegacy` previously `runClient` is now sunset and will be removed in 2 versions.
 convert your configuration as soon as possible or breakages will occur!
 
