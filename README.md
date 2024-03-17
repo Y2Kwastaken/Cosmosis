@@ -95,12 +95,35 @@ tasks.downloadLoader {
 
 ### Run Client Task
 
-By default the task `gradle runClient` searches for a `launcher.sh` or `launcher.bat`, however,
+By default the task `gradle runClient` searches for mod loader jar in the `FabricLoader` directory to
+run. You can configure the default name of this file as well as add new launch options using the `addLaunchArguments`  
+method to add more launch arguments. Example on how to configure the name below.
+
+```kotlin
+tasks.runClient {
+    loaderJar = "my-other-loader.jar"
+}
+```
+
+You can also add more arguments like so
+```kotlin
+tasks.runClient {
+    addLaunchArgument("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005")
+}
+```
+
+### Run Client Legacy Task (Deprecated)
+
+> **Warning**
+`runClientLegacy` previously `runClient` is now sunset and will be removed in 2 versions.
+convert your configuration as soon as possible or breakages will occur!
+
+By default the task `gradle runClientLegacy` searches for a `launcher.sh` or `launcher.bat`, however,
 you can change what the base name of this launcher is for example if the launcher is named
 `launch.sh` instead of `launcher.sh` you can configure it to do so. An example is below
 
 ```kotlin
-tasks.runClient {
+tasks.runClientLegacy {
     launcherFileGeneric = "launch"
 }
 ```
