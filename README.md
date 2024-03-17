@@ -69,6 +69,20 @@ Cosmosis is fairly configurable so it will be nearly impossible to go through ev
 within this README section in depth however, I will cover the likely to be most used configuration
 settings.
 
+### Required Properties
+
+In order to work cosmosis requires some gradle property to be set
+
+#### web_driver
+
+Web driver is required to use the selenium backend and it takes one of two arguments either `firefox` or `chrome`. This allows CosmicTools to automatically download CosmicReach.
+example, I use a firefox based browser.
+
+gradle.properties
+```properties
+web_driver=firefox
+```
+
 ### Dev Bundle
 
 the cosmosis dev bundle can be configured to obtain the loader from a different dependency
