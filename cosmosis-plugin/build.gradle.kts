@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":cosmosis-core"))
+    api(project(":cosmosis-core"))
 }
 
 gradlePlugin {

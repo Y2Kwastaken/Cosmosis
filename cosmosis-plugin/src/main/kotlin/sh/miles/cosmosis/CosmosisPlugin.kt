@@ -3,11 +3,13 @@ package sh.miles.cosmosis
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.logging.Logging
+import sh.miles.cosmosis.v2.tasks.copy.CopyCosmicReach
 import sh.miles.cosmosis.v2.tasks.download.DownloadCosmicTools
 import sh.miles.cosmosis.v2.tasks.download.SetupFabricLoader
 import sh.miles.cosmosis.v2.tasks.run.RunClientTask
 import sh.miles.cosmosis.v2.tasks.run.RunCosmicTools
 import sh.miles.cosmosis.v2.utils.COSMIC_TOOLS_FOLDER
+import sh.miles.cosmosis.v2.utils.COSMIC_TOOLS_JAR
 import sh.miles.cosmosis.v2.utils.COSMIC_TOOLS_VERSION
 import sh.miles.cosmosis.v2.utils.COSMOSIS_CATEGORY
 import sh.miles.cosmosis.v2.utils.COSMOSIS_SETUP_CATEGORY
@@ -31,6 +33,9 @@ class CosmosisPlugin : Plugin<Project> {
     private fun cosmosis(target: Project) {
         target.tasks.register("runClient", RunClientTask::class.java) {
             group = COSMOSIS_CATEGORY
+            description = "Runs the CosmicReach client"
+
+            workingDir(FABRIC_LOADER_FOLDER)
             loaderJar = FABRIC_LOADER_JAR
             librariesFolder = "libs"
         }
@@ -39,12 +44,14 @@ class CosmosisPlugin : Plugin<Project> {
     private fun setup(target: Project) {
         target.tasks.register("downloadCosmicTools", DownloadCosmicTools::class.java) {
             group = COSMOSIS_SETUP_CATEGORY
+            description = "Downloads CosmicTools"
             version = COSMIC_TOOLS_VERSION
             outputDirectory = target.layout.projectDirectory.dir(COSMIC_TOOLS_FOLDER)
         }
 
         target.tasks.register("setupFabricLoader", SetupFabricLoader::class.java) {
             group = COSMOSIS_SETUP_CATEGORY
+            description = "Setup the fabric loader of choice"
             version = FABRIC_LOADER_VERSION
             url = FABRIC_LOADER_URL
             zipName = "$FABRIC_LOADER_ARTIFACT-$FABRIC_LOADER_VERSION.zip"
@@ -53,8 +60,19 @@ class CosmosisPlugin : Plugin<Project> {
 
         target.tasks.register("runCosmicTools", RunCosmicTools::class.java) {
             group = COSMOSIS_SETUP_CATEGORY
+            description = "Runs CosmicTools"
             workingDir(COSMIC_TOOLS_FOLDER)
-            driver = "firefox"
+
+            classpath(target.file("$COSMIC_TOOLS_FOLDER/$COSMIC_TOOLS_JAR"))
+        }
+
+        target.tasks.register("copyCosmicReach", CopyCosmicReach::class.java) {
+            group = COSMOSIS_SETUP_CATEGORY
+            description = "Copies the output of CosmicTools for the desired version"
+
+            cosmicTools = target.layout.projectDirectory.dir(COSMIC_TOOLS_FOLDER)
+            fabricLoader = target.layout.projectDirectory.dir(FABRIC_LOADER_FOLDER)
+            finalName = "cosmic-reach.jar"
         }
     }
 
